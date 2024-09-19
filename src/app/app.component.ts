@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ConfigService } from './service/config/config.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,13 @@ export class AppComponent {
   title = 'channel-archive-frontend';
   streamedApiResponse: string = "";
 
-  constructor() {
+  constructor(private configService: ConfigService) {
 
   }
 
   async start() {
     let ref = this;
-    let url = "http://localhost:8080/download";
+    let url = this.configService.serverUrl + "/download";
     let requestBody = {dryRun: true}
     fetch(url, {
       method: "POST",

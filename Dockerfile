@@ -16,6 +16,8 @@ FROM nginx:stable-alpine
 
 COPY --from=build /app/dist/channel-archive-frontend/browser /usr/share/nginx/html
 
+RUN sed -i "s|default_value|${SERVER_URL}|g" /usr/share/nginx/html/assets/config.js
+
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
