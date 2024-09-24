@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DownloadOptionsFormComponent } from './forms/download-options-form/download-options-form.component';
 import { AppModule } from './app.module';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent {
   async start() {
     this.streamedApiResponse = "";
     let ref = this;
-    let url = "http://localhost:8080/download";
+    let url = environment.url + "/download";
     let requestBody = {dryRun: this.dryRun}
     fetch(url, {
       method: "POST",
