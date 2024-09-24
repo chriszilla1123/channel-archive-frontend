@@ -27,7 +27,7 @@ export class AppComponent {
     this.streamedApiResponse = "";
     let ref = this;
     let url = environment.url + "/download";
-    let requestBody = {dryRun: this.dryRun}
+    let requestBody = {dryRun: this.dryRun};
     fetch(url, {
       method: "POST",
       headers: {
