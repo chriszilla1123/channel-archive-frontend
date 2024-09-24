@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { DownloadOptionsFormComponent } from './forms/download-options-form/download-options-form.component';
+import { AppModule } from './app.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    AppModule,
+    RouterOutlet,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'channel-archive-frontend';
   streamedApiResponse: string = "";
+  dryRun: boolean = false;
 
   constructor() {
 
   }
 
   async start() {
+    this.streamedApiResponse = "";
     let ref = this;
     let url = "http://localhost:8080/download";
-    let requestBody = {dryRun: true}
+    let requestBody = {dryRun: this.dryRun}
     fetch(url, {
       method: "POST",
       headers: {
@@ -44,5 +51,9 @@ export class AppComponent {
     }).catch((err) => {
       console.error(err);
     })
+  }
+
+  formUpdate(event: any) {
+    this.dryRun = event.dryRun;
   }
 }

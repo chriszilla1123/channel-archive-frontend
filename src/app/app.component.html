@@ -1,14 +1,16 @@
 <main class="main">
   <div class="content">
     <header>
-			<h1>Channel Archive</h1>
-			<h1>Web Interface</h1>
-			<button type="button" (click)="start()">Start Download</button>
-		</header>
-		<br>
-		<div id="output-container">
-		</div>
-		<div id="output" [innerHTML]="streamedApiResponse"></div>
+      <h1>Channel Archive</h1>
+      <h1>Web Interface</h1>
+      <download-options-form (formUpdate)="formUpdate($event)"></download-options-form>
+      <br>
+      <button type="button" (click)="start()">Start Download</button>
+    </header>
+    <br>
+    <div id="output-container">
+    </div>
+    <div id="output" [innerHTML]="streamedApiResponse"></div>
   </div>
 </main>
 
