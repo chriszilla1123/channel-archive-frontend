@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DownloadOptionsFormComponent } from './forms/download-options-form/download-options-form.component';
+import { Router, RouterOutlet } from '@angular/router';
 import { AppModule } from './app.module';
-import { environment } from '../environments/environment';
+import { LoginService } from './service/login/login.service';
+import { LoginCredentials } from './model/login-credentials.model';
 
 @Component({
   selector: 'app-root',
@@ -15,46 +15,23 @@ import { environment } from '../environments/environment';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'channel-archive-frontend';
-  streamedApiResponse: string = "";
-  dryRun: boolean = false;
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
-  }
+  ngOnInit() {
+    console.log("Channel Archive Web Interface started...");
 
-  async start() {
-    this.streamedApiResponse = "";
-    let ref = this;
-    let url = environment.url + "/download";
-    let requestBody = {dryRun: this.dryRun};
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
+    this.loginService.getAndValidateStoredCredentials().subscribe({
+      next: (loginCredentials: LoginCredentials) => {
+        console.log("Validated login credentials and server is up");
       },
-      body: JSON.stringify(requestBody)
-    }).then(response => {
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-
-      function read() {
-        reader?.read().then(({ done, value }) => {
-          if(done) {
-            return;
-          }
-          ref.streamedApiResponse += decoder.decode(value, {stream:true}).replace(/(?:\t)/g, "&emsp;&emsp;&emsp;&emsp;").replace(/(?:\r\n|\r|\n)/g, '<br>');
-          read();
-        });
+      error: (error: unknown) => {
+        console.log("Navigating to login page after credentials failed to validate with message: " + error);
+        this.router.navigate(['/login']);
       }
-
-      read();
-    }).catch((err) => {
-      console.error(err);
     })
-  }
-
-  formUpdate(event: any) {
-    this.dryRun = event.dryRun;
   }
 }

@@ -1,0 +1,9 @@
+<div id="main">
+  <download-options-form (formUpdate)="formUpdate($event)"></download-options-form>
+  <br>
+  <button type="button" (click)="start()">Start Download</button>
+  <br><br>
+  <div id="output-container">
+    <div id="output" [innerHTML]="streamedApiResponse"></div>
+  </div>
+</div>
