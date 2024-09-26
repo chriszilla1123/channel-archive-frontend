@@ -38,6 +38,11 @@ export class LoginService {
         localStorage.setItem(this.PASSWORD_REF, password);
     }
 
+    clearStoredCredentials(): void {
+        localStorage.removeItem(this.USERNAME_REF);
+        localStorage.removeItem(this.PASSWORD_REF);
+    }
+
     /**
      * Validates the login credentials by sending a health check request to the server
      * @param username 
@@ -46,7 +51,7 @@ export class LoginService {
      */
     validateCredentials(username: string, password: string): Observable<LoginCredentials> {
         return new Observable<LoginCredentials>((observer: Observer<LoginCredentials>) => {
-            this.httpClient.get<string>(environment.url + "/health").subscribe({
+            this.httpClient.get(environment.url + "/health", { responseType: 'text' }).subscribe({
                 next: (response: string) => {
                     if(response === "UP") {
                         observer.next(new LoginCredentials(username, password));
@@ -61,6 +66,7 @@ export class LoginService {
             });
         });
     }
+
 
     /**
      * Fetches the stored login credentials and validates them with a health check
@@ -86,14 +92,15 @@ export class LoginService {
      * @returns 
      */
     validateAndStoreCredentials(username: string, password: string): Observable<LoginCredentials> {
+        this.storeCredentials(username, password);
         return new Observable<LoginCredentials>((observer) => {
             return this.validateCredentials(username, password).subscribe({
                 next: (response: LoginCredentials) => {
-                    this.storeCredentials(username, password);
                     observer.next(response);
                     observer.complete();
                 },
                 error: (error: unknown) => {
+                    this.clearStoredCredentials();
                     observer.error(error);
                 }
             })  

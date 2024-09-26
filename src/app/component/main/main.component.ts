@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { environment } from "../../../environments/environment";
+import { LoginCredentials } from "../../model/login-credentials.model";
+import { LoginService } from "../../service/login/login.service";
 
 @Component({
     selector: "app-main",
@@ -10,18 +12,25 @@ export class MainComponent {
     streamedApiResponse: string = "";
     dryRun: boolean = false;
 
-    constructor() {}
+    constructor(
+      private loginService: LoginService
+    ) {}
 
     async start() {
         this.streamedApiResponse = "";
         let ref = this;
         let url = environment.url + "/download";
         let requestBody = {dryRun: this.dryRun};
+        let loginCredentials: LoginCredentials | null = this.loginService.getStoredCredentials();
+        if(!loginCredentials) {
+          return;
+        }
         fetch(url, {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            "Authorization": "Basic " + window.btoa("localuser:localpassword")
+            "Authorization": "Basic " + window.btoa(loginCredentials.username 
+                                            + ":" + loginCredentials.password)
           },
           body: JSON.stringify(requestBody)
         }).then(response => {
