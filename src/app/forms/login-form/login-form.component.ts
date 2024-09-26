@@ -25,11 +25,6 @@ export class LoginFormComponent {
         })
     }
 
-    // ngOnInit(): void {
-    //     this.form.valueChanges.subscribe(value => {
-    //     });
-    // }
-
     onSubmit() {
         const username = this.form.get('username')?.value;
         const password = this.form.get('password')?.value;
@@ -38,6 +33,7 @@ export class LoginFormComponent {
                 this.formSubmit.emit(response);
             },
             error: (error: unknown) => {
+                //TODO: Notification
                 console.log(error);
             }
         })

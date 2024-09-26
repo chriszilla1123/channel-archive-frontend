@@ -29,6 +29,7 @@ export class AppComponent {
         console.log("Validated login credentials and server is up");
       },
       error: (error: unknown) => {
+        //TODO: Notification
         console.log("Navigating to login page after credentials failed to validate with message: " + error);
         this.router.navigate(['/login']);
       }
