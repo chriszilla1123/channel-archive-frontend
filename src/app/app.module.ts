@@ -6,6 +6,7 @@ import { LoginComponent } from "./component/login/login.component";
 import { LoginFormComponent } from "./forms/login-form/login-form.component";
 import { MenubarModule } from "primeng/menubar";
 import { HeaderComponent } from "./component/header/header.component";
+import { ButtonModule } from "primeng/button";
 
 @NgModule ({
     declarations: [
@@ -18,6 +19,7 @@ import { HeaderComponent } from "./component/header/header.component";
     imports: [
         ReactiveFormsModule,
         MenubarModule,
+        ButtonModule
     ],
     exports: [
         HeaderComponent,
