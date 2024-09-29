@@ -1,5 +1,6 @@
 button {
-    color: #444;
+    color: var(--background-color-main);
+    background: var(--text-color-secondary);
     font-size: 16px;
     border-radius: 20px;
     border-width: 0px;

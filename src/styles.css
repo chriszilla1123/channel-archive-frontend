@@ -1,19 +1,41 @@
-body {
-    font:18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    margin: 10px auto;
-    line-height: 1.6;
-    font-size: 16px;
-    color: #444;
-    padding: 0 5px;
+/* Global CSS */
+:root {
+    --light-grey-blue: #c9d1d9;
+    --grey-blue: #a2adb8;
+    --light-blue: #58a6ff;
+    --blue: #1f6feb;
+    --less-dark-blue-almost-black: #161b22;
+    --very-dark-blue-almost-black: #0d1117;
+    --green: #238636;
+
+    --background-color-main: var(--very-dark-blue-almost-black);
+    --background-color-secondary: var(--less-dark-blue-almost-black);
+    --text-color: var(--light-grey-blue);
+    --secondary-text-color: var(--grey-blue);
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        color:#c9d1d9;
-        background:#0d1117
-    }
+body {
+    font:18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0px auto;
+    line-height: 1.6;
+    font-size: 16px;
+    color: var(--text-color);
+    background: var(--background-color-main);
+}
 
-    button {
-        color: #0d1117;
-    }
+.header-menubar {
+    background-color: var(--background-color-secondary);
+}
+
+.header-menubar .ui-menubar-root-list > li {
+    margin-left: auto;
+}
+
+.p-menubar-button {
+    color: var(--text-color);
+}
+
+/*Move the mobile collapsed menu hamburger icon to the right */
+a.p-menubar-button{
+    order: 3;
 }

@@ -4,28 +4,28 @@ import { DownloadOptionsFormComponent } from "./forms/download-options-form/down
 import { MainComponent } from "./component/main/main.component";
 import { LoginComponent } from "./component/login/login.component";
 import { LoginFormComponent } from "./forms/login-form/login-form.component";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AuthInterceptor } from "./interceptor/auth.interceptor";
+import { MenubarModule } from "primeng/menubar";
+import { HeaderComponent } from "./component/header/header.component";
 
 @NgModule ({
     declarations: [
+        HeaderComponent,
         MainComponent,
         LoginComponent,
         LoginFormComponent,
         DownloadOptionsFormComponent,
     ],
     imports: [
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MenubarModule,
     ],
     exports: [
+        HeaderComponent,
         MainComponent,
         LoginComponent,
         LoginFormComponent,
         DownloadOptionsFormComponent,
     ],
-    // providers: [
-    //     { provide: HTTP_INTERCEPTORS, useValue: AuthInterceptor, multi: true }
-    //   ]
 })
 export class AppModule {
 
