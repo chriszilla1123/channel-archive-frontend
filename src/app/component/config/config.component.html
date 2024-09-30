@@ -1,0 +1,13 @@
+<div id="config-main">
+    <div id="config-output">
+        <h1>Channels</h1>
+        <div class="channel-wrapper" *ngFor="let channel of channels">
+            name: {{ channel.channelName }}
+            <br>
+            id: {{ channel.channelId }}
+            <br>
+            directory: {{ channel.channelDir }}
+            <br><br>
+        </div>
+    </div>
+</div>

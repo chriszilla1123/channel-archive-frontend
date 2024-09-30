@@ -7,16 +7,20 @@ import { LoginFormComponent } from "./forms/login-form/login-form.component";
 import { MenubarModule } from "primeng/menubar";
 import { HeaderComponent } from "./component/header/header.component";
 import { ButtonModule } from "primeng/button";
+import { CommonModule } from "@angular/common";
+import { ConfigComponent } from "./component/config/config.component";
 
 @NgModule ({
     declarations: [
         HeaderComponent,
         MainComponent,
         LoginComponent,
+        ConfigComponent,
         LoginFormComponent,
         DownloadOptionsFormComponent,
     ],
     imports: [
+        CommonModule,
         ReactiveFormsModule,
         MenubarModule,
         ButtonModule
@@ -25,6 +29,7 @@ import { ButtonModule } from "primeng/button";
         HeaderComponent,
         MainComponent,
         LoginComponent,
+        ConfigComponent,
         LoginFormComponent,
         DownloadOptionsFormComponent,
     ],
