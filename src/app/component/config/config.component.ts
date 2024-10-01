@@ -10,6 +10,8 @@ import { Channel } from "../../model/channel.model";
 })
 export class ConfigComponent {
     channels: Channel[] = [];
+    editingEnabled: boolean = false; //Set true when editing is enabled
+    saveInProgress: boolean = false; //Set true when a save request is in progress
 
     constructor(
         private router: Router,
@@ -18,14 +20,68 @@ export class ConfigComponent {
     }
 
     ngOnInit() {
+        this.fetchChannels();
+    }
+
+    fetchChannels() {
         this.configService.getConfig().subscribe({
             next: (response: any) => {
                 this.channels = response;
-                console.log(this.channels);
             },
             error: (error: unknown) => {
                 console.log(error);
             }
         });
     }
+
+    saveChanges() {
+        if(this.saveInProgress) {
+            return;
+        }
+        this.saveInProgress = true;
+        let channelsCopy = JSON.parse(JSON.stringify(this.channels));
+        channelsCopy = channelsCopy.filter((channel: Channel) => { return this.validateChannel(channel) })
+        this.configService.updateChannels(channelsCopy).subscribe({
+            next: (response: Channel[]) => {
+                //TODO: Notification
+                this.editingEnabled = false;
+                this.channels = response;
+            },
+            error: (error: any) => {
+                //TODO: Notification
+                alert(error.error);
+                console.log(error);
+                this.fetchChannels();
+                this.saveInProgress = false;
+            }
+        })
+    }
+
+    validateChannel(channel: Channel): boolean {
+        return channel.channelName != null && channel.channelId != null && channel.channelDir != null
+        && channel.channelName.length > 0 && channel.channelId.length > 0 && channel.channelDir.length > 0;
+    }
+
+    enableEditing() {
+        this.editingEnabled = true;
+        this.saveInProgress = false;
+    }
+
+    discardChanges() {
+        this.editingEnabled = false;
+        this.fetchChannels();
+    }
+
+    deleteChannel(index: number) {
+        delete this.channels[index];
+    }
+
+    addChannel() {
+        this.channels.push({
+            channelId: "",
+            channelName: "",
+            channelDir: ""
+        });
+    }
+
 }

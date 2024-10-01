@@ -1,3 +1,16 @@
 #config-output {
     text-align: center;
 }
+
+#config-channel-list-header-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.config-table-channel-name-row,
+.config-table-channel-id-row,
+.config-table-channel-dir-row {
+    font-size:14px;
+}

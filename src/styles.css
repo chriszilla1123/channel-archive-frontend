@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 /* Global CSS */
 :root {
     --light-grey-blue: #c9d1d9;
@@ -48,3 +50,7 @@ a.p-menubar-button{
     background: var(--secondary-text-color);
 }
 /* END MAIN.COMPONENT */
+
+/* START CONFIG.COMPONENT */
+
+/* END CONFIG.COMPONENT */

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DownloadOptionsFormComponent } from "./forms/download-options-form/download-options-form.component";
 import { MainComponent } from "./component/main/main.component";
 import { LoginComponent } from "./component/login/login.component";
@@ -9,6 +9,7 @@ import { HeaderComponent } from "./component/header/header.component";
 import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
 import { ConfigComponent } from "./component/config/config.component";
+import { TableModule } from "primeng/table";
 
 @NgModule ({
     declarations: [
@@ -21,9 +22,11 @@ import { ConfigComponent } from "./component/config/config.component";
     ],
     imports: [
         CommonModule,
+        FormsModule,
         ReactiveFormsModule,
+        TableModule,
         MenubarModule,
-        ButtonModule
+        ButtonModule,
     ],
     exports: [
         HeaderComponent,

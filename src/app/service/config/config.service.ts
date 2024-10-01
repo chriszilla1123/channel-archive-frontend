@@ -28,4 +28,19 @@ export class ConfigService {
             });  
         })
     }
+
+    updateChannels(channels: Channel[]): Observable<Channel[]> {
+        return new Observable<Channel[]>((observer) => {
+            this.httpClient.put(environment.url + "/config/channels/update", channels).subscribe({
+                next: (response: any) => {
+                    observer.next(response);
+                    observer.complete();  
+                },
+                error: (error: unknown) => {
+                    console.error(error);
+                    observer.error(error);
+                }
+            });  
+        })
+    }
 }
