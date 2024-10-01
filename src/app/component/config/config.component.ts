@@ -72,6 +72,24 @@ export class ConfigComponent {
         this.fetchChannels();
     }
 
+    moveChannelUp(index: number) {
+        if(index == 0) {
+            return;
+        }
+        let temp: Channel = this.channels[index - 1];
+        this.channels[index - 1] = this.channels[index];
+        this.channels[index] = temp;
+    }
+
+    moveChannelDown(index: number) {
+        if(index == this.channels.length - 1) {
+            return;
+        }
+        let temp: Channel = this.channels[index + 1];
+        this.channels[index + 1] = this.channels[index];
+        this.channels[index] = temp;
+    }
+
     deleteChannel(index: number) {
         delete this.channels[index];
     }
