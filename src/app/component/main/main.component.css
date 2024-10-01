@@ -10,9 +10,20 @@
 }
 
 #output {
+    max-width: 95%;
     text-align: left;
-    overflow-wrap: break-word;
+    /* overflow: ellipsis; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     padding-left: 5px;
     padding-right: 5px;
     font-family: monospace;
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+    #output {
+        font-size: 9px;
+    }
 }
