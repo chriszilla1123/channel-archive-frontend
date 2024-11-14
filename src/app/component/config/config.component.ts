@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
 import { ConfigService } from "../../service/config/config.service";
 import { Channel } from "../../model/channel.model";
 
@@ -14,7 +13,6 @@ export class ConfigComponent {
     saveInProgress: boolean = false; //Set true when a save request is in progress
 
     constructor(
-        private router: Router,
         private configService: ConfigService,
     ) {
     }
