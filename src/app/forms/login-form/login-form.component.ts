@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { LoginCredentials } from "../../model/login-credentials.model";
-import { LoginService } from "../../service/login/login.service";
+import {Component, EventEmitter, Output} from "@angular/core";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {LoginCredentials} from "../../model/login-credentials.model";
+import {LoginService} from "../../service/login/login.service";
+import {NotificationService} from "../../service/notification/notification.service";
+import {NotificationLevel} from "../../enum/NotificationLevel.enum";
 
 @Component({
     selector: 'login-form',
@@ -13,11 +15,12 @@ export class LoginFormComponent {
     form: FormGroup;
     username = new FormControl('');
     password = new FormControl('');
-    
+
 
     constructor(
         private formBuilder: FormBuilder,
-        private loginService: LoginService
+        private loginService: LoginService,
+        private notificationService: NotificationService,
     ) {
         this.form = this.formBuilder.group({
             username: [''],
@@ -30,10 +33,11 @@ export class LoginFormComponent {
         const password = this.form.get('password')?.value;
         this.loginService.validateAndStoreCredentials(username, password).subscribe({
             next: (response: LoginCredentials) => {
+                this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + username);
                 this.formSubmit.emit(response);
             },
             error: (error: unknown) => {
-                //TODO: Notification
+                this.notificationService.notify(NotificationLevel.ERROR, "Error", "Invalid username/password");
                 console.log(error);
             }
         })

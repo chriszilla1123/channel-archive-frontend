@@ -14,7 +14,6 @@ export class LoginComponent {
     }
 
     formSubmit(event: any) {
-        //TODO: Notification
         this.router.navigate(['']);
     }
 }

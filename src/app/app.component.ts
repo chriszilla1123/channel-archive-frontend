@@ -3,6 +3,9 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AppModule } from './app.module';
 import { LoginService } from './service/login/login.service';
 import { LoginCredentials } from './model/login-credentials.model';
+import {ToastModule} from "primeng/toast";
+import {NotificationService} from "./service/notification/notification.service";
+import {NotificationLevel} from "./enum/NotificationLevel.enum";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,7 @@ import { LoginCredentials } from './model/login-credentials.model';
   imports: [
     AppModule,
     RouterOutlet,
+    ToastModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -18,7 +22,8 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -27,9 +32,9 @@ export class AppComponent {
     this.loginService.getAndValidateStoredCredentials().subscribe({
       next: (loginCredentials: LoginCredentials) => {
         console.log("Validated login credentials and server is up");
+        this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + loginCredentials.username);
       },
       error: (error: unknown) => {
-        //TODO: Notification
         console.log("Navigating to login page after credentials failed to validate with message: " + error);
         this.router.navigate(['/login']);
       }

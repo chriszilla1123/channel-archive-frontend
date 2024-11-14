@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
-import { ConfigService } from "../../service/config/config.service";
-import { Channel } from "../../model/channel.model";
+import {Component} from "@angular/core";
+import {ConfigService} from "../../service/config/config.service";
+import {Channel} from "../../model/channel.model";
+import {NotificationService} from "../../service/notification/notification.service";
+import {NotificationLevel} from "../../enum/NotificationLevel.enum";
 
 @Component({
     selector: 'app-config',
@@ -14,6 +16,7 @@ export class ConfigComponent {
 
     constructor(
         private configService: ConfigService,
+        private notificationService: NotificationService,
     ) {
     }
 
@@ -41,13 +44,12 @@ export class ConfigComponent {
         channelsCopy = channelsCopy.filter((channel: Channel) => { return this.validateChannel(channel) })
         this.configService.updateChannels(channelsCopy).subscribe({
             next: (response: Channel[]) => {
-                //TODO: Notification
                 this.editingEnabled = false;
                 this.channels = response;
+                this.notificationService.notify(NotificationLevel.SUCCESS, "Success", "Channel configuration saved successfully")
             },
             error: (error: any) => {
-                //TODO: Notification
-                alert(error.error);
+                this.notificationService.notify(NotificationLevel.ERROR, "Error", error.error, 5000);
                 console.log(error);
                 this.fetchChannels();
                 this.saveInProgress = false;
