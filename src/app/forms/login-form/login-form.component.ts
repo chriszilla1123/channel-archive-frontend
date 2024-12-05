@@ -6,40 +6,40 @@ import {NotificationService} from "../../service/notification/notification.servi
 import {NotificationLevel} from "../../enum/NotificationLevel.enum";
 
 @Component({
-    selector: 'login-form',
-    templateUrl: './login-form.component.html',
-    styleUrl: './login-form.component.css'
+  selector: 'login-form',
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.css'
 })
 export class LoginFormComponent {
-    @Output() formSubmit = new EventEmitter<LoginCredentials>();
-    form: FormGroup;
-    username = new FormControl('');
-    password = new FormControl('');
+  @Output() formSubmit = new EventEmitter<LoginCredentials>();
+  form: FormGroup;
+  username = new FormControl('');
+  password = new FormControl('');
 
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private loginService: LoginService,
-        private notificationService: NotificationService,
-    ) {
-        this.form = this.formBuilder.group({
-            username: [''],
-            password: ['']
-        })
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private notificationService: NotificationService,
+  ) {
+    this.form = this.formBuilder.group({
+      username: [''],
+      password: ['']
+    })
+  }
 
-    onSubmit() {
-        const username = this.form.get('username')?.value;
-        const password = this.form.get('password')?.value;
-        this.loginService.validateAndStoreCredentials(username, password).subscribe({
-            next: (response: LoginCredentials) => {
-                this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + username);
-                this.formSubmit.emit(response);
-            },
-            error: (error: unknown) => {
-                this.notificationService.notify(NotificationLevel.ERROR, "Error", "Invalid username/password");
-                console.log(error);
-            }
-        })
-    }
+  onSubmit() {
+    const username = this.form.get('username')?.value;
+    const password = this.form.get('password')?.value;
+    this.loginService.validateAndStoreCredentials(username, password).subscribe({
+      next: (response: LoginCredentials) => {
+        this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + username);
+        this.formSubmit.emit(response);
+      },
+      error: (error: unknown) => {
+        this.notificationService.notify(NotificationLevel.ERROR, "Error", "Invalid username/password");
+        console.log(error);
+      }
+    })
+  }
 }

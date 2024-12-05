@@ -1,7 +1,8 @@
 <div id="main">
   <download-options-form (formUpdate)="formUpdate($event)"></download-options-form>
   <br>
-  <p-button type="button" (click)="start()" label="Start Download" styleClass="start-download-button" id="start-download-button"/>
+  <p-button type="button" (click)="start()" label="Start Download" styleClass="start-download-button"
+            id="start-download-button"/>
   <br><br>
   <div id="output-container">
     <div id="output" [innerHTML]="streamedApiResponse"></div>

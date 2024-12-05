@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { AppModule } from './app.module';
-import { LoginService } from './service/login/login.service';
-import { LoginCredentials } from './model/login-credentials.model';
+import {Component} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import {AppModule} from './app.module';
+import {LoginService} from './service/login/login.service';
+import {LoginCredentials} from './model/login-credentials.model';
 import {ToastModule} from "primeng/toast";
 import {NotificationService} from "./service/notification/notification.service";
 import {NotificationLevel} from "./enum/NotificationLevel.enum";
@@ -24,7 +24,8 @@ export class AppComponent {
     private router: Router,
     private loginService: LoginService,
     private notificationService: NotificationService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     console.log("Channel Archive Web Interface started...");
