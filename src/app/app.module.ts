@@ -10,11 +10,15 @@ import {ButtonModule} from "primeng/button";
 import {CommonModule} from "@angular/common";
 import {ConfigComponent} from "./component/config/config.component";
 import {TableModule} from "primeng/table";
+import {DownloadQueueComponent} from "./component/download-queue/download-queue.component";
+import {AccordionModule} from "primeng/accordion";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MainComponent,
+    DownloadQueueComponent,
     LoginComponent,
     ConfigComponent,
     LoginFormComponent,
@@ -27,6 +31,8 @@ import {TableModule} from "primeng/table";
     TableModule,
     MenubarModule,
     ButtonModule,
+    AccordionModule,
+    TooltipModule,
   ],
   exports: [
     HeaderComponent,

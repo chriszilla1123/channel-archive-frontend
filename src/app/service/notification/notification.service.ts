@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {MessageService} from "primeng/api";
-import {NotificationLevel} from "../../enum/NotificationLevel.enum";
+import {NotificationLevel} from "../../enum/notification-level.enum";
 
 @Injectable({
   providedIn: 'root',

@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {LoginCredentials} from "../../model/login-credentials.model";
 import {LoginService} from "../../service/login/login.service";
 import {NotificationService} from "../../service/notification/notification.service";
-import {NotificationLevel} from "../../enum/NotificationLevel.enum";
+import {NotificationLevel} from "../../enum/notification-level.enum";
 
 @Component({
   selector: 'login-form',

@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {ConfigService} from "../../service/config/config.service";
 import {Channel} from "../../model/channel.model";
 import {NotificationService} from "../../service/notification/notification.service";
-import {NotificationLevel} from "../../enum/NotificationLevel.enum";
+import {NotificationLevel} from "../../enum/notification-level.enum";
 
 @Component({
   selector: 'app-config',

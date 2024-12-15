@@ -5,7 +5,7 @@ import {LoginService} from './service/login/login.service';
 import {LoginCredentials} from './model/login-credentials.model';
 import {ToastModule} from "primeng/toast";
 import {NotificationService} from "./service/notification/notification.service";
-import {NotificationLevel} from "./enum/NotificationLevel.enum";
+import {NotificationLevel} from "./enum/notification-level.enum";
 
 @Component({
   selector: 'app-root',

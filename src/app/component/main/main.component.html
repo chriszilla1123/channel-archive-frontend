@@ -4,7 +4,5 @@
   <p-button type="button" (click)="start()" label="Start Download" styleClass="start-download-button"
             id="start-download-button"/>
   <br><br>
-  <div id="output-container">
-    <div id="output" [innerHTML]="streamedApiResponse"></div>
-  </div>
+  <app-download-queue></app-download-queue>
 </div>
