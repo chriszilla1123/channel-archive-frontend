@@ -5,4 +5,10 @@
             id="start-download-button"/>
   <br><br>
   <app-download-queue></app-download-queue>
+  <p-dialog header="Results ({{dryRunVideos.length}})" [(visible)]="showDryRunDialog">
+    <span *ngFor="let video of dryRunVideos">
+      {{video.channelName}}: {{video.title}}
+      <br>
+    </span>
+  </p-dialog>
 </div>
