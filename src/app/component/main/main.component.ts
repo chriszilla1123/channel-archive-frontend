@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {DownloadService} from "../../service/download/download.service";
 import {DownloadRequestModel} from "../../model/download-request.model";
+import {Video} from "../../model/video.model";
+import {Channel} from "../../model/channel.model";
 
 @Component({
   selector: "app-main",
@@ -9,6 +11,8 @@ import {DownloadRequestModel} from "../../model/download-request.model";
 })
 export class MainComponent {
   dryRun: boolean = false;
+  showDryRunDialog: boolean = false;
+  dryRunVideos: Video[] = [];
 
   constructor(
     private downloadService: DownloadService,
@@ -18,8 +22,13 @@ export class MainComponent {
   async start() {
     let requestModel = new DownloadRequestModel(this.dryRun);
     this.downloadService.downloadArchive(requestModel).subscribe({
-      next: (response: any) => {
-
+      next: (response: Channel[]) => {
+        if(this.dryRun) {
+          this.showDryRunDialog = true;
+          response.forEach((channel: Channel) => {
+            this.dryRunVideos.push(...channel.videos);
+          })
+        }
       },
       error: (error: unknown) => {
         console.error(error);

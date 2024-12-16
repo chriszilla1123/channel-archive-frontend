@@ -100,7 +100,8 @@ export class ConfigComponent {
     this.channels.push({
       channelId: "",
       channelName: "",
-      channelDir: ""
+      channelDir: "",
+      videos: []
     });
   }
 

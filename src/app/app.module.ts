@@ -13,6 +13,7 @@ import {TableModule} from "primeng/table";
 import {DownloadQueueComponent} from "./component/download-queue/download-queue.component";
 import {AccordionModule} from "primeng/accordion";
 import {TooltipModule} from "primeng/tooltip";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {TooltipModule} from "primeng/tooltip";
     ButtonModule,
     AccordionModule,
     TooltipModule,
+    DialogModule,
   ],
   exports: [
     HeaderComponent,
