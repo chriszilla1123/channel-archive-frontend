@@ -24,6 +24,7 @@ export class MainComponent {
     this.downloadService.downloadArchive(requestModel).subscribe({
       next: (response: Channel[]) => {
         if(this.dryRun) {
+          this.dryRunVideos = [];
           this.showDryRunDialog = true;
           response.forEach((channel: Channel) => {
             this.dryRunVideos.push(...channel.videos);

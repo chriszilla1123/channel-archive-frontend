@@ -3,6 +3,7 @@ import {DownloadQueueModel} from "../../model/download-queue.model";
 import {DownloadService} from "../../service/download/download.service";
 import {interval, Observable, Subscription, switchMap} from "rxjs";
 import {formatDistance, formatRelative} from "date-fns";
+import {DownloadStatus} from "../../enum/download-status.enum";
 
 @Component({
   selector: "app-download-queue",
@@ -11,6 +12,7 @@ import {formatDistance, formatRelative} from "date-fns";
 })
 export class DownloadQueueComponent implements OnInit, OnDestroy{
   downloadQueue: DownloadQueueModel = new DownloadQueueModel([], [], [], []);
+  downloadStatus: DownloadStatus[] = [DownloadStatus.INPROGRESS, DownloadStatus.PENDING, DownloadStatus.SUCCESS]
   queueUpdateSubscription: Subscription = new Subscription;
   queueUpdateInterval = 1000 // 1000ms = 1 second
   queueItemTextMaxLength = 25;
