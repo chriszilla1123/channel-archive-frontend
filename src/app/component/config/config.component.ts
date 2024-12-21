@@ -42,7 +42,7 @@ export class ConfigComponent {
     this.saveInProgress = true;
     let channelsCopy = JSON.parse(JSON.stringify(this.channels));
     channelsCopy = channelsCopy.filter((channel: Channel) => {
-      return this.validateChannel(channel)
+      return channel != null && this.validateChannel(channel)
     })
     this.configService.updateChannels(channelsCopy).subscribe({
       next: (response: Channel[]) => {
