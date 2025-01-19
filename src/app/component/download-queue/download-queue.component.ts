@@ -4,6 +4,7 @@ import {DownloadService} from "../../service/download/download.service";
 import {interval, Observable, Subscription, switchMap} from "rxjs";
 import {formatDistance, formatRelative} from "date-fns";
 import {DownloadStatus} from "../../enum/download-status.enum";
+import {Video} from "../../model/video.model";
 
 @Component({
   selector: "app-download-queue",
@@ -37,11 +38,31 @@ export class DownloadQueueComponent implements OnInit, OnDestroy{
     this.queueUpdateSubscription = interval(this.queueUpdateInterval)
       .pipe(switchMap(() => this.updateDownloadQueue()))
       .subscribe({
-        next: (response: any) => {
-          if(this.isQueueChanged(this.downloadQueue, response)) {
-            this.downloadQueue = response
+        next: (response: DownloadQueueModel) => {
+          let updateFound: boolean = false;
+          if(this.isQueueChanged(this.downloadQueue.inProgressDownloads, response.inProgressDownloads)) {
+            this.downloadQueue.inProgressDownloads = response.inProgressDownloads;
+            updateFound = true;
+          }
+          if(this.isQueueChanged(this.downloadQueue.pendingDownloads, response.pendingDownloads)) {
+            this.downloadQueue.pendingDownloads = response.pendingDownloads;
+            updateFound = true;
+          }
+          if(this.isQueueChanged(this.downloadQueue.completedDownloads, response.completedDownloads)) {
+            this.downloadQueue.completedDownloads = response.completedDownloads;
+            updateFound = true;
+          }
+          if(this.isQueueChanged(this.downloadQueue.failedDownloads, response.failedDownloads)) {
+            this.downloadQueue.failedDownloads = response.failedDownloads;
+            updateFound = true;
+          }
+          if(updateFound) {
             this.changeDetectorRef.detectChanges();
           }
+          // if(this.isQueueChanged(this.downloadQueue, response)) {
+          //   this.downloadQueue = response
+          //   this.changeDetectorRef.detectChanges();
+          // }
         },
         error: (error: unknown) => {
           console.error(error);
@@ -56,7 +77,7 @@ export class DownloadQueueComponent implements OnInit, OnDestroy{
     }
   }
 
-  isQueueChanged(queue1: DownloadQueueModel, queue2: DownloadQueueModel): boolean {
+  isQueueChanged(queue1: Video[], queue2: Video[]): boolean {
     return JSON.stringify(queue1) !== JSON.stringify(queue2);
   }
 
