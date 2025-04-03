@@ -17,7 +17,7 @@
     <div class="download-queue-item" *ngFor="let video of list">
       <div class="download-queue-container-item" [pTooltip]="video.title" tooltipPosition="top">{{(video.title.length>this.queueItemTextMaxLength)? (video.title | slice:0:this.queueItemTextMaxLength)+'...':(video.title)}}</div>
       <div *ngIf="status == downloadStatus[0]" class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.downloadStatus" tooltipPosition="top">{{(video.downloadStatus.length>this.queueItemTextMaxLength)? (video.downloadStatus | slice:0:this.queueItemTextMaxLength)+'...':(video.downloadStatus)}}</div>
-      <div class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.channelName" tooltipPosition="top">{{(video.channelName.length>this.queueItemTextMaxLength)? (video.channelName | slice:0:this.queueItemTextMaxLength)+'...':(video.channelName)}}</div>
+      <div *ngIf="video.channelName" class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.channelName" tooltipPosition="top">{{(video.channelName.length>this.queueItemTextMaxLength)? (video.channelName | slice:0:this.queueItemTextMaxLength)+'...':(video.channelName)}}</div>
       <div class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="formatDownloadDate_Long(video.download_date)" tooltipPosition="top"> {{formatDownloadDate(video.download_date)}}</div>
     </div>
   </div>
