@@ -15,13 +15,10 @@
 <ng-template #downloadQueueTemplate let-list="list" let-status="status">
   <div class="download-queue-container">
     <div class="download-queue-item" *ngFor="let video of list">
-      <span class="download-queue-container-item" [pTooltip]="video.title" tooltipPosition="top">{{(video.title.length>this.queueItemTextMaxLength)? (video.title | slice:0:this.queueItemTextMaxLength)+'...':(video.title)}}</span>
-      <br *ngIf="status == downloadStatus[0]">
-      <span *ngIf="status == downloadStatus[0]" class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.downloadStatus" tooltipPosition="top">{{(video.downloadStatus.length>this.queueItemTextMaxLength)? (video.downloadStatus | slice:0:this.queueItemTextMaxLength)+'...':(video.downloadStatus)}}</span>
-      <br>
-      <span class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.channelName" tooltipPosition="top">{{(video.channelName.length>this.queueItemTextMaxLength)? (video.channelName | slice:0:this.queueItemTextMaxLength)+'...':(video.channelName)}}</span>
-      <br>
-      <span class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="formatDownloadDate_Long(video.download_date)" tooltipPosition="top"> {{formatDownloadDate(video.download_date)}}</span>
+      <div class="download-queue-container-item" [pTooltip]="video.title" tooltipPosition="top">{{(video.title.length>this.queueItemTextMaxLength)? (video.title | slice:0:this.queueItemTextMaxLength)+'...':(video.title)}}</div>
+      <div *ngIf="status == downloadStatus[0]" class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.downloadStatus" tooltipPosition="top">{{(video.downloadStatus.length>this.queueItemTextMaxLength)? (video.downloadStatus | slice:0:this.queueItemTextMaxLength)+'...':(video.downloadStatus)}}</div>
+      <div class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.channelName" tooltipPosition="top">{{(video.channelName.length>this.queueItemTextMaxLength)? (video.channelName | slice:0:this.queueItemTextMaxLength)+'...':(video.channelName)}}</div>
+      <div class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="formatDownloadDate_Long(video.download_date)" tooltipPosition="top"> {{formatDownloadDate(video.download_date)}}</div>
     </div>
   </div>
 </ng-template>

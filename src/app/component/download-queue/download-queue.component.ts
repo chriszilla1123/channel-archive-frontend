@@ -15,7 +15,7 @@ export class DownloadQueueComponent implements OnInit, OnDestroy{
   downloadStatus: DownloadStatus[] = [DownloadStatus.INPROGRESS, DownloadStatus.PENDING, DownloadStatus.SUCCESS]
   queueUpdateSubscription: Subscription = new Subscription;
   queueUpdateInterval = 1000 // 1000ms = 1 second
-  queueItemTextMaxLength = 25;
+  queueItemTextMaxLength = 100;
 
   constructor(
     private downloadService: DownloadService,
