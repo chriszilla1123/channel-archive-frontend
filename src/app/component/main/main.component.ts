@@ -3,7 +3,6 @@ import {DownloadService} from "../../service/download/download.service";
 import {DownloadRequestModel} from "../../model/download-request.model";
 import {Video} from "../../model/video.model";
 import {Channel} from "../../model/channel.model";
-import {NotificationService} from "../../service/notification/notification.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -21,7 +20,6 @@ export class MainComponent {
 
   constructor(
     private downloadService: DownloadService,
-    private notificationService: NotificationService,
   ) {
   }
 
@@ -38,7 +36,6 @@ export class MainComponent {
         }
       },
       error: (error: HttpErrorResponse) => {
-        this.notificationService.notifyHttpErrorResponse(error);
       }
     })
   }
@@ -50,7 +47,6 @@ export class MainComponent {
 
       },
       error: (error: HttpErrorResponse) => {
-        this.notificationService.notifyHttpErrorResponse(error);
       }
     })
   }

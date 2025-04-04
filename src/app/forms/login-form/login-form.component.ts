@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {LoginCredentials} from "../../model/login-credentials.model";
 import {LoginService} from "../../service/login/login.service";
 import {NotificationService} from "../../service/notification/notification.service";
-import {NotificationLevel} from "../../enum/notification-level.enum";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'login-form',
@@ -20,7 +20,6 @@ export class LoginFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
-    private notificationService: NotificationService,
   ) {
     this.form = this.formBuilder.group({
       username: [''],
@@ -33,11 +32,9 @@ export class LoginFormComponent {
     const password = this.form.get('password')?.value;
     this.loginService.validateAndStoreCredentials(username, password).subscribe({
       next: (response: LoginCredentials) => {
-        this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + username);
         this.formSubmit.emit(response);
       },
-      error: (error: unknown) => {
-        this.notificationService.notify(NotificationLevel.ERROR, "Error", "Invalid username/password");
+      error: (error: HttpErrorResponse) => {
         console.log(error);
       }
     })

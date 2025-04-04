@@ -1,8 +1,10 @@
 import {Injectable} from "@angular/core";
 import {LoginCredentials} from "../../model/login-credentials.model";
 import {Observable, Observer} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {NotificationService} from "../notification/notification.service";
+import {NotificationLevel} from "../../enum/notification-level.enum";
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,10 @@ export class LoginService {
   USERNAME_REF = 'USER';
   PASSWORD_REF = 'PASS';
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private notificationService: NotificationService,
+    ) {}
 
   /**
    * Fetches the stored username and password, if they exist
@@ -61,7 +65,7 @@ export class LoginService {
             observer.error(new Error("Unable to connect to server"));
           }
         },
-        error: (error: unknown) => {
+        error: (error: HttpErrorResponse) => {
           observer.error(error);
         }
       });
@@ -71,6 +75,7 @@ export class LoginService {
 
   /**
    * Fetches the stored login credentials and validates them with a health check
+   * Called when logging into the app
    * @returns LoginCredentials, or null if they don't exist
    */
   getAndValidateStoredCredentials(): Observable<LoginCredentials> {
@@ -88,6 +93,7 @@ export class LoginService {
 
   /**
    * Validates login credentials with a health check and stores them in localStorage if successful
+   * Called on login
    * @param username
    * @param password
    * @returns
@@ -97,10 +103,12 @@ export class LoginService {
     return new Observable<LoginCredentials>((observer) => {
       return this.validateCredentials(username, password).subscribe({
         next: (response: LoginCredentials) => {
+          this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + username);
           observer.next(response);
           observer.complete();
         },
-        error: (error: unknown) => {
+        error: (error: HttpErrorResponse) => {
+          this.notificationService.notify(NotificationLevel.ERROR, "Error", "Invalid username/password");
           this.clearStoredCredentials();
           observer.error(error);
         }
