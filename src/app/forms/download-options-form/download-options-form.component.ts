@@ -10,10 +10,13 @@ export class DownloadOptionsFormComponent {
   @Output() formUpdate = new EventEmitter<any>();
   form: FormGroup;
   dryRun = new FormControl('');
+  oneOffVideoUrl = new FormControl('');
+
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       dryRun: [''],
+      oneOffVideoUrl: [''],
     })
   }
 

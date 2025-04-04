@@ -5,6 +5,7 @@ import {Channel} from "../../model/channel.model";
 import {Injectable} from "@angular/core";
 import {DownloadQueueModel} from "../../model/download-queue.model";
 import {DownloadRequestModel} from "../../model/download-request.model";
+import {ErrorResponse} from "../../model/error-response.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,29 @@ export class DownloadService {
 
   downloadArchive(requestModel: DownloadRequestModel): Observable<Channel[]> {
     return new Observable<Channel[]>((observer: Observer<Channel[]>) => {
-      this.httpClient.post(environment.url + "/download", requestModel).subscribe({
-        next: (response: any) => {
+      this.httpClient.post<Channel[]>(environment.url + "/download", requestModel).subscribe({
+        next: (response: Channel[]) => {
           observer.next(response);
           observer.complete();
         },
-        error: (error: unknown) => {
+        error: (error: ErrorResponse) => {
           console.error(error);
+          observer.error(error);
+        }
+      });
+    });
+  }
+
+  downloadOneOff(requestModel: DownloadRequestModel): Observable<boolean> {
+    return new Observable<boolean>((observer: Observer<boolean>) => {
+      this.httpClient.post<boolean>(environment.url + "/download/oneoff", requestModel).subscribe({
+        next: (response: boolean) => {
+          observer.next(response);
+          observer.complete();
+        },
+        error: (error: ErrorResponse) => {
+          console.error(error);
+          observer.error(error);
         }
       });
     });
