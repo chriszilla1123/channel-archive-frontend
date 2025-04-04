@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {MessageService} from "primeng/api";
 import {NotificationLevel} from "../../enum/notification-level.enum";
+import {HttpErrorResponse} from "@angular/common/http";
+import {ErrorResponse} from "../../model/error-response.model";
 
 @Injectable({
   providedIn: 'root',
@@ -19,5 +21,11 @@ export class NotificationService {
 
   clear(): void {
     this.messageService.clear();
+  }
+
+  notifyHttpErrorResponse(response: HttpErrorResponse): void {
+    const errorResponse: ErrorResponse = response.error;
+    this.notify(NotificationLevel.ERROR, "Error", errorResponse.message);
+    console.error(errorResponse);
   }
 }

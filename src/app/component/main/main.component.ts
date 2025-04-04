@@ -3,6 +3,8 @@ import {DownloadService} from "../../service/download/download.service";
 import {DownloadRequestModel} from "../../model/download-request.model";
 import {Video} from "../../model/video.model";
 import {Channel} from "../../model/channel.model";
+import {NotificationService} from "../../service/notification/notification.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: "app-main",
@@ -10,12 +12,16 @@ import {Channel} from "../../model/channel.model";
   styleUrl: "./main.component.css",
 })
 export class MainComponent {
+  //Sent as event from download-options-form
   dryRun: boolean = false;
+  oneOffVideoUrl: string = "";
+
   showDryRunDialog: boolean = false;
   dryRunVideos: Video[] = [];
 
   constructor(
     private downloadService: DownloadService,
+    private notificationService: NotificationService,
   ) {
   }
 
@@ -31,13 +37,26 @@ export class MainComponent {
           })
         }
       },
-      error: (error: unknown) => {
-        console.error(error);
+      error: (error: HttpErrorResponse) => {
+        this.notificationService.notifyHttpErrorResponse(error);
+      }
+    })
+  }
+
+  startOneOff() {
+    let requestModel = new DownloadRequestModel(this.dryRun, this.oneOffVideoUrl);
+    this.downloadService.downloadOneOff(requestModel).subscribe({
+      next: (response: boolean) => {
+
+      },
+      error: (error: HttpErrorResponse) => {
+        this.notificationService.notifyHttpErrorResponse(error);
       }
     })
   }
 
   formUpdate(event: any) {
     this.dryRun = event.dryRun;
+    this.oneOffVideoUrl = event.oneOffVideoUrl;
   }
 }

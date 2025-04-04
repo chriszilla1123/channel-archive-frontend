@@ -1,7 +1,11 @@
 <div id="main">
   <download-options-form (formUpdate)="formUpdate($event)"></download-options-form>
   <br>
-  <p-button type="button" (click)="start()" label="Start Download" styleClass="start-download-button"
+  <div *ngIf="oneOffVideoUrl">
+    <p-button type="button" (click)="startOneOff()" label="Download Link" styleClass="start-download-button" id="download-link-button"/>
+    <br><br>
+  </div>
+  <p-button type="button" (click)="start()" label="Download All Channels" styleClass="start-download-button"
             id="start-download-button"/>
   <br><br>
   <app-download-queue></app-download-queue>

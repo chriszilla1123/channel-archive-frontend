@@ -14,6 +14,7 @@ import {DownloadQueueComponent} from "./component/download-queue/download-queue.
 import {AccordionModule} from "primeng/accordion";
 import {TooltipModule} from "primeng/tooltip";
 import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
@@ -26,15 +27,16 @@ import {DialogModule} from "primeng/dialog";
     DownloadOptionsFormComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TableModule,
-    MenubarModule,
-    ButtonModule,
-    AccordionModule,
-    TooltipModule,
-    DialogModule,
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      TableModule,
+      MenubarModule,
+      ButtonModule,
+      AccordionModule,
+      TooltipModule,
+      DialogModule,
+      InputTextModule,
   ],
   exports: [
     HeaderComponent,
