@@ -6,6 +6,7 @@ import {LoginCredentials} from './model/login-credentials.model';
 import {ToastModule} from "primeng/toast";
 import {NotificationService} from "./service/notification/notification.service";
 import {NotificationLevel} from "./enum/notification-level.enum";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ export class AppComponent {
         console.log("Validated login credentials and server is up");
         this.notificationService.notify(NotificationLevel.SUCCESS, "Login Successful", "Welcome back, " + loginCredentials.username);
       },
-      error: (error: unknown) => {
+      error: (error: HttpErrorResponse) => {
         console.log("Navigating to login page after credentials failed to validate with message: " + error);
         this.router.navigate(['/login']);
       }

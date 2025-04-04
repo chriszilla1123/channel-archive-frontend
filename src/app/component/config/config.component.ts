@@ -1,8 +1,7 @@
 import {Component} from "@angular/core";
 import {ConfigService} from "../../service/config/config.service";
 import {Channel} from "../../model/channel.model";
-import {NotificationService} from "../../service/notification/notification.service";
-import {NotificationLevel} from "../../enum/notification-level.enum";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-config',
@@ -16,7 +15,6 @@ export class ConfigComponent {
 
   constructor(
     private configService: ConfigService,
-    private notificationService: NotificationService,
   ) {
   }
 
@@ -29,7 +27,7 @@ export class ConfigComponent {
       next: (response: any) => {
         this.channels = response;
       },
-      error: (error: unknown) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
       }
     });
@@ -48,11 +46,8 @@ export class ConfigComponent {
       next: (response: Channel[]) => {
         this.editingEnabled = false;
         this.channels = response;
-        this.notificationService.notify(NotificationLevel.SUCCESS, "Success", "Channel configuration saved successfully")
       },
-      error: (error: any) => {
-        this.notificationService.notify(NotificationLevel.ERROR, "Error", error.error, 5000);
-        console.log(error);
+      error: (error: HttpErrorResponse) => {
         this.fetchChannels();
         this.saveInProgress = false;
       }

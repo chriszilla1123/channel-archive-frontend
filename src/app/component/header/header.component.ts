@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {MenuItem} from "primeng/api";
 import {ConfigService} from "../../service/config/config.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,7 @@ export class HeaderComponent {
         localStorage.setItem(this.YTDL_VERSION_REF, response);
         this.ytdlVersion = localStorage.getItem(this.YTDL_VERSION_REF);
       },
-      error: (error: unknown) => {
+      error: (error: HttpErrorResponse) => {
         console.log(error);
       }
     })

@@ -5,6 +5,7 @@ import {interval, Observable, Subscription, switchMap} from "rxjs";
 import {formatDistance, formatRelative} from "date-fns";
 import {DownloadStatus} from "../../enum/download-status.enum";
 import {Video} from "../../model/video.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: "app-download-queue",
@@ -64,7 +65,7 @@ export class DownloadQueueComponent implements OnInit, OnDestroy{
           //   this.changeDetectorRef.detectChanges();
           // }
         },
-        error: (error: unknown) => {
+        error: (error: HttpErrorResponse) => {
           console.error(error);
         }
       })
