@@ -1,0 +1,21 @@
+<div id="browse-channels-main">
+  <h2>Browse Channels</h2>
+  <div id="browse-channel-list-wrapper">
+    <p-table [value]="channels" dataKey="id" [tableStyle]="{ }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:25%">Name</th>
+          <th style="width:25%">ID/URL</th>
+          <th style="width:25%">Directory</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-channel>
+        <tr (click)="onChannelClicked(channel)">
+          <td class="browse-table-channel-name-row">{{ channel.channelName != null ? channel.channelName : "***Configure me instead***" }}</td>
+          <td class="browse-table-channel-id-row">{{ channel.channelId != null ? channel.channelId : "***Configure me instead***" }}</td>
+          <td class="browse-table-channel-dir-row">{{ channel.channelDir }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

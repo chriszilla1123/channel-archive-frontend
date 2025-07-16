@@ -15,6 +15,8 @@ import {AccordionModule} from "primeng/accordion";
 import {TooltipModule} from "primeng/tooltip";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
+import {BrowseChannelsComponent} from "./component/browse-channels/browse-channels.component";
+import {BrowseVideosComponent} from "./component/browse-videos/browse-videos.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {InputTextModule} from "primeng/inputtext";
     DownloadQueueComponent,
     LoginComponent,
     ConfigComponent,
+    BrowseChannelsComponent,
+    BrowseVideosComponent,
     LoginFormComponent,
     DownloadOptionsFormComponent,
   ],
@@ -45,6 +49,8 @@ import {InputTextModule} from "primeng/inputtext";
     ConfigComponent,
     LoginFormComponent,
     DownloadOptionsFormComponent,
+    BrowseChannelsComponent,
+    BrowseVideosComponent,
   ],
 })
 export class AppModule {
