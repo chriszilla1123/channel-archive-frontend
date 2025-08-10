@@ -1,12 +1,24 @@
 <div id="browse-videos-main">
   <h2>Browse Videos for {{isChannelConfigured ? channel.channelName : "unconfigured channel"}}</h2>
+  <div *ngIf="playingVideoSource">
+    <ng-container *ngTemplateOutlet="videoPlayerTemplate; context: {source: playingVideoSource}"></ng-container>
+  </div>
+  <div *ngIf="!playingVideoSource">
+
+  </div>
   <ng-container *ngTemplateOutlet="browseVideoTemplate; context: {list: channel.videos}"></ng-container>
 </div>
 
 <ng-template #browseVideoTemplate let-list="list" let-status="status">
   <div class="browse-videos-container">
     <div class="browse-videos-item" *ngFor="let video of list">
-      <div class="browse-video-container-item" [pTooltip]="video.title" tooltipPosition="top">{{(video.title.length>this.browseItemTextMaxLength)? (video.title | slice:0:this.browseItemTextMaxLength)+'...':(video.title)}}</div>
+      <div class="browse-video-container-item" [pTooltip]="video.title" tooltipPosition="top" (click)="onVideoClicked(video)">
+        {{(video.title.length>this.browseItemTextMaxLength)? (video.title | slice:0:this.browseItemTextMaxLength)+'...':(video.title)}}
+      </div>
     </div>
   </div>
+</ng-template>
+
+<ng-template #videoPlayerTemplate let-source="source">
+  <video #videoPlayer controls width="640" [src]="source"></video>
 </ng-template>

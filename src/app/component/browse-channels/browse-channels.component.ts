@@ -33,7 +33,7 @@ export class BrowseChannelsComponent {
   }
 
   onChannelClicked(channel: Channel) {
-    this.router.navigate(['/browse-videos'], {
+    this.router.navigate(['/browse/videos'], {
       state: { channel: channel }
     });
   }
