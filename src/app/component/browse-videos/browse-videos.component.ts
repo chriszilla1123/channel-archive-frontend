@@ -19,7 +19,7 @@ export class BrowseVideosComponent implements OnInit{
 
   constructor(
     private location: Location,
-    private streamService: StreamService) {
+    ) {
   }
 
   ngOnInit() {

@@ -11,8 +11,8 @@
       </ng-template>
       <ng-template pTemplate="body" let-channel>
         <tr (click)="onChannelClicked(channel)">
-          <td class="browse-table-channel-name-row">{{ channel.channelName != null ? channel.channelName : "***Configure me instead***" }}</td>
-          <td class="browse-table-channel-id-row">{{ channel.channelId != null ? channel.channelId : "***Configure me instead***" }}</td>
+          <td class="browse-table-channel-name-row">{{ channel.channelName != null ? channel.channelName : "-" }}</td>
+          <td class="browse-table-channel-id-row">{{ channel.channelId != null ? channel.channelId : "-" }}</td>
           <td class="browse-table-channel-dir-row">{{ channel.channelDir }}</td>
         </tr>
       </ng-template>
