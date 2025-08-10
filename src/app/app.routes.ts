@@ -9,6 +9,6 @@ export const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: 'config', component: ConfigComponent},
-  {path: 'browse-channels', component: BrowseChannelsComponent},
-  {path: 'browse-videos', component: BrowseVideosComponent},
+  {path: 'browse/channels', component: BrowseChannelsComponent},
+  {path: 'browse/videos', component: BrowseVideosComponent},
 ];

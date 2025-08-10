@@ -6,8 +6,9 @@ export class Video {
   directory: string;
   channelName: string;
   downloadStatus: string;
+  path?: string;
 
-  constructor(id: string, title: string, url: string, download_date: string, directory: string, channelName: string, downloadStatus: string) {
+  constructor(id: string, title: string, url: string, download_date: string, directory: string, channelName: string, downloadStatus: string, path?: string) {
     this.id = id;
     this.title = title;
     this.url = url;
@@ -15,6 +16,7 @@ export class Video {
     this.directory = directory;
     this.channelName = channelName;
     this.downloadStatus = downloadStatus;
+    this.path = path;
   }
 
   toString(): string {
