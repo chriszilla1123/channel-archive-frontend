@@ -1,7 +1,7 @@
 <p-menubar styleClass="header-menubar" [model]="items">
   <ng-template pTemplate="start">
     <img src="favicon.ico">
-    <span class="site-name">Channel Archive</span>
+    <span class="site-name">Channel Archive {{demo ? '(Demo Mode)' : ''}}</span>
   </ng-template>
 
   <ng-template pTemplate="item" let-item>
