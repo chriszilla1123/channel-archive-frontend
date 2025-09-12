@@ -6,8 +6,11 @@
     <p-accordionTab header="In Queue ({{downloadQueue.pendingDownloads.length}})">
       <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.pendingDownloads, status: downloadStatus[1]}"></ng-container>
     </p-accordionTab>
-    <p-accordionTab header="History ({{downloadQueue.failedDownloads.concat(downloadQueue.completedDownloads).length}})" headerStyleClass="headerStyleClass">
-      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.failedDownloads.concat(downloadQueue.completedDownloads), status: downloadStatus[2]}"></ng-container>
+    <p-accordionTab header="History ({{downloadQueue.completedDownloads.length}})" headerStyleClass="headerStyleClass">
+      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.completedDownloads, status: downloadStatus[2]}"></ng-container>
+    </p-accordionTab>
+    <p-accordionTab header="Failed ({{downloadQueue.failedDownloads.length}})" headerStyleClass="headerStyleClass">
+      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.failedDownloads, status: downloadStatus[3]}"></ng-container>
     </p-accordionTab>
   </p-accordion>
 </div>
