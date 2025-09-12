@@ -2,9 +2,9 @@ import {Injectable} from "@angular/core";
 import {LoginCredentials} from "../../model/login-credentials.model";
 import {Observable, Observer} from "rxjs";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {NotificationService} from "../notification/notification.service";
 import {NotificationLevel} from "../../enum/notification-level.enum";
+import {EnvironmentService} from "../environment/environment.service";
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class LoginService {
 
   constructor(
     private httpClient: HttpClient,
+    private environmentService: EnvironmentService,
     private notificationService: NotificationService,
     ) {}
 
@@ -56,7 +57,7 @@ export class LoginService {
    */
   validateCredentials(username: string, password: string): Observable<LoginCredentials> {
     return new Observable<LoginCredentials>((observer: Observer<LoginCredentials>) => {
-      this.httpClient.get(environment.url + "/health", {responseType: 'text'}).subscribe({
+      this.httpClient.get(this.environmentService.API_URL + "/health", {responseType: 'text'}).subscribe({
         next: (response: string) => {
           if (response === "UP") {
             observer.next(new LoginCredentials(username, password));

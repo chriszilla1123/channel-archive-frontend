@@ -2,7 +2,6 @@ import {Component, EventEmitter, Output} from "@angular/core";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {LoginCredentials} from "../../model/login-credentials.model";
 import {LoginService} from "../../service/login/login.service";
-import {NotificationService} from "../../service/notification/notification.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
