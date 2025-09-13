@@ -17,18 +17,20 @@ import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {BrowseChannelsComponent} from "./component/browse-channels/browse-channels.component";
 import {BrowseVideosComponent} from "./component/browse-videos/browse-videos.component";
+import {AdminComponent} from "./component/admin/admin.component";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MainComponent,
     DownloadQueueComponent,
+    DownloadOptionsFormComponent,
     LoginComponent,
     ConfigComponent,
     BrowseChannelsComponent,
     BrowseVideosComponent,
     LoginFormComponent,
-    DownloadOptionsFormComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,

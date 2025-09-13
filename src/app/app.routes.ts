@@ -4,6 +4,7 @@ import {MainComponent} from './component/main/main.component';
 import {ConfigComponent} from './component/config/config.component';
 import {BrowseChannelsComponent} from "./component/browse-channels/browse-channels.component";
 import {BrowseVideosComponent} from "./component/browse-videos/browse-videos.component";
+import {AdminComponent} from "./component/admin/admin.component";
 
 export const routes: Routes = [
   {path: '', component: MainComponent},
@@ -11,4 +12,5 @@ export const routes: Routes = [
   {path: 'config', component: ConfigComponent},
   {path: 'browse/channels', component: BrowseChannelsComponent},
   {path: 'browse/videos', component: BrowseVideosComponent},
+  {path: 'admin', component: AdminComponent}
 ];
