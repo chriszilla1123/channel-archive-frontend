@@ -28,7 +28,7 @@ export class HeaderComponent {
       {label: "Config", routerLink: ["/config"]},
       {label: "Browse", routerLink: ["/browse/channels"]},
       {label: "Login", routerLink: ["/login"]},
-      {label: "Admin", routerLink: ["/admin"]},
+      //{label: "Admin", routerLink: ["/admin"]},
     ];
     this.ytdlVersion = localStorage.getItem(this.YTDL_VERSION_REF);
     this.fetchYtdlVersion();
