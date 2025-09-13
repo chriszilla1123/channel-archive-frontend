@@ -17,6 +17,9 @@ FROM nginx:stable-alpine
 # Copy built Angular app
 COPY --from=build /app/dist/channel-archive-frontend/browser /usr/share/nginx/html
 
+# Copy custom nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy custom entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
