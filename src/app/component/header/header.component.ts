@@ -22,12 +22,13 @@ export class HeaderComponent {
     private constants: Constants,
     private configService: ConfigService,
   ) {
-    this.demo = this.environmentService.DEMO === this.constants.DOCKER_DEMO_TRUE;
+    this.demo = environmentService.DEMO;
     this.items = [
       {label: "Download", routerLink: [""]},
       {label: "Config", routerLink: ["/config"]},
       {label: "Browse", routerLink: ["/browse/channels"]},
       {label: "Login", routerLink: ["/login"]},
+      {label: "Admin", routerLink: ["/admin"]},
     ];
     this.ytdlVersion = localStorage.getItem(this.YTDL_VERSION_REF);
     this.fetchYtdlVersion();
