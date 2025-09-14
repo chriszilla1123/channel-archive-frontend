@@ -1,19 +1,43 @@
 <div id="download-queue">
-  <p-accordion [activeIndex]="[0, 1, 2]" [multiple]="true">
-    <p-accordionTab header="Downloading ({{downloadQueue.inProgressDownloads.length}})">
+  <p-accordion [activeIndex]="[0, 1,]" [multiple]="true">
+
+    <p-accordionTab *ngIf="downloadQueue.inProgressDownloads.length > 0" header="In Progress ({{downloadQueue.inProgressDownloads.length}})">
       <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.inProgressDownloads, status: downloadStatus[0]}"></ng-container>
     </p-accordionTab>
-    <p-accordionTab header="In Queue ({{downloadQueue.pendingDownloads.length}})">
-      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.pendingDownloads, status: downloadStatus[1]}"></ng-container>
+
+    <p-accordionTab *ngIf="downloadQueue.pendingDownloads.length > 0" header="Pending ({{downloadQueue.pendingDownloads.length}})" headerStyleClass="headerStyleClass">
+      <ng-template pTemplate="header" [ngTemplateOutlet]="downloadQueueHeaderTemplate"
+                   [ngTemplateOutletContext]="{ actions: [ { icon: 'pi pi-trash', styleClass: 'download-queue-button-clear', status: downloadStatus[1] } ] }">
+      </ng-template>
+      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: { list: downloadQueue.pendingDownloads, status: downloadStatus[1] }"></ng-container>
     </p-accordionTab>
-    <p-accordionTab header="History ({{downloadQueue.completedDownloads.length}})" headerStyleClass="headerStyleClass">
-      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.completedDownloads, status: downloadStatus[2]}"></ng-container>
+
+    <p-accordionTab *ngIf="downloadQueue.completedDownloads.length > 0" header="Completed ({{downloadQueue.completedDownloads.length}})">
+      <ng-template pTemplate="header" [ngTemplateOutlet]="downloadQueueHeaderTemplate"
+                   [ngTemplateOutletContext]="{ actions: [ { icon: 'pi pi-trash', styleClass: 'download-queue-button-clear', status: downloadStatus[2] } ] }">
+      </ng-template>
+      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: { list: downloadQueue.completedDownloads, status: downloadStatus[2] }"></ng-container>
     </p-accordionTab>
-    <p-accordionTab header="Failed ({{downloadQueue.failedDownloads.length}})" headerStyleClass="headerStyleClass">
-      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.failedDownloads, status: downloadStatus[3]}"></ng-container>
+
+    <p-accordionTab *ngIf="downloadQueue.failedDownloads.length > 0" header="Failed ({{downloadQueue.failedDownloads.length}})">
+      <ng-template pTemplate="header" [ngTemplateOutlet]="downloadQueueHeaderTemplate"
+                   [ngTemplateOutletContext]="{ actions: [ { icon: 'pi pi-trash', styleClass: 'download-queue-button-clear', status: downloadStatus[3] } ] }">
+      </ng-template>
+      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: { list: downloadQueue.failedDownloads, status: downloadStatus[3] }"></ng-container>
     </p-accordionTab>
   </p-accordion>
 </div>
+
+<ng-template #downloadQueueHeaderTemplate let-actions="actions">
+  <div class="download-queue-header-actions">
+    <p-button *ngFor="let action of actions"
+              [icon]="action.icon"
+              [styleClass]="action.styleClass"
+              (onClick)="clearDownloadType(action.status)">
+      {{action.displayText}}
+    </p-button>
+  </div>
+</ng-template>
 
 <ng-template #downloadQueueTemplate let-list="list" let-status="status">
   <div class="download-queue-container">

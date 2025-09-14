@@ -1,6 +1,6 @@
 export enum DownloadStatus {
-  PENDING = 'pending',
   INPROGRESS = 'in-progress',
-  SUCCESS = 'success',
+  PENDING = 'pending',
+  COMPLETED = 'success',
   FAIL = 'fail'
 }

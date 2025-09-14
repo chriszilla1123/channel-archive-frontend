@@ -14,9 +14,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class DownloadQueueComponent implements OnInit, OnDestroy{
   downloadQueue: DownloadQueueModel = new DownloadQueueModel([], [], [], []);
-  downloadStatus: DownloadStatus[] = [DownloadStatus.INPROGRESS, DownloadStatus.PENDING, DownloadStatus.SUCCESS]
+  downloadStatus: DownloadStatus[] = [DownloadStatus.INPROGRESS, DownloadStatus.PENDING, DownloadStatus.COMPLETED, DownloadStatus.FAIL]
   queueUpdateSubscription: Subscription = new Subscription;
-  queueUpdateInterval = 1000 // 1000ms = 1 second
+  queueUpdateInterval = 250 // 1000ms = 1 second
   queueItemTextMaxLength = 100;
 
   constructor(
@@ -84,6 +84,29 @@ export class DownloadQueueComponent implements OnInit, OnDestroy{
 
   updateDownloadQueue(): Observable<DownloadQueueModel> {
     return this.downloadService.getDownloadQueue();
+  }
+
+  clearDownloadType(type: DownloadStatus) {
+    if( type === DownloadStatus.PENDING ) {
+      this.clearPendingDownloads();
+    } else if ( type === DownloadStatus.COMPLETED ) {
+      this.clearCompletedDownloads()
+    } else if ( type === DownloadStatus.FAIL ) {
+      this.clearFailedDownloads();
+    }
+  }
+
+  clearPendingDownloads(): void {
+    this.downloadService.clearPendingDownloads().subscribe();
+  }
+
+  clearCompletedDownloads(): void {
+    this.downloadService.clearCompletedDownloads().subscribe();
+  }
+
+  clearFailedDownloads(): void {
+    this.downloadService.clearFailedDownloads().subscribe();
+    console.log("Cleared download queue");
   }
 
   formatDownloadDate(date: Date): string {
