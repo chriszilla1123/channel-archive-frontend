@@ -78,6 +78,16 @@ a.p-accordion-header-link, div.p-accordion-content, div.p-dataview-content {
   color: var(--text-color);
   background: var(--background-color-main);
 }
+
+.download-queue-button-clear {
+  color: var(--background-color-main);
+  background: var(--secondary-text-color);
+  width: auto;
+  padding: 8px 12px;
+  margin-top: -10px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
 /* END DOWNLOAD-QUEUE.COMPONENT */
 
 /* START CONFIG.COMPONENT */

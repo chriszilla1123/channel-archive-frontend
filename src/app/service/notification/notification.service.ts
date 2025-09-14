@@ -25,7 +25,7 @@ export class NotificationService {
 
   notifyHttpErrorResponse(response: HttpErrorResponse): void {
     const errorResponse: ErrorResponse = response.error;
-    this.notify(NotificationLevel.ERROR, "Error", errorResponse.message);
+    this.notify(NotificationLevel.ERROR, "Error", errorResponse ? errorResponse.message : "no error message");
     console.error(errorResponse);
   }
 }

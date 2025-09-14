@@ -61,4 +61,49 @@ export class DownloadService {
       });
     });
   }
+
+  clearPendingDownloads(): Observable<DownloadQueueModel> {
+    return new Observable<DownloadQueueModel>((observer: Observer<DownloadQueueModel>) => {
+      this.httpClient.get(this.environmentService.API_URL + "/download/clear/pending").subscribe({
+        next: (response: any) => {
+          observer.next(response);
+          observer.complete();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.notificationService.notifyHttpErrorResponse(error);
+          observer.error(error);
+        }
+      });
+    });
+  }
+
+  clearCompletedDownloads(): Observable<DownloadQueueModel> {
+    return new Observable<DownloadQueueModel>((observer: Observer<DownloadQueueModel>) => {
+      this.httpClient.get(this.environmentService.API_URL + "/download/clear/completed").subscribe({
+        next: (response: any) => {
+          observer.next(response);
+          observer.complete();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.notificationService.notifyHttpErrorResponse(error);
+          observer.error(error);
+        }
+      });
+    });
+  }
+
+  clearFailedDownloads(): Observable<DownloadQueueModel> {
+    return new Observable<DownloadQueueModel>((observer: Observer<DownloadQueueModel>) => {
+      this.httpClient.get(this.environmentService.API_URL + "/download/clear/failed").subscribe({
+        next: (response: any) => {
+          observer.next(response);
+          observer.complete();
+        },
+        error: (error: HttpErrorResponse) => {
+          this.notificationService.notifyHttpErrorResponse(error);
+          observer.error(error);
+        }
+      });
+    });
+  }
 }
