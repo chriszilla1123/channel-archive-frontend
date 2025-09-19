@@ -18,6 +18,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {BrowseChannelsComponent} from "./component/browse-channels/browse-channels.component";
 import {BrowseVideosComponent} from "./component/browse-videos/browse-videos.component";
 import {AdminComponent} from "./component/admin/admin.component";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -32,18 +33,19 @@ import {AdminComponent} from "./component/admin/admin.component";
     LoginFormComponent,
     AdminComponent,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TableModule,
-    MenubarModule,
-    ButtonModule,
-    AccordionModule,
-    TooltipModule,
-    DialogModule,
-    InputTextModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TableModule,
+        MenubarModule,
+        ButtonModule,
+        AccordionModule,
+        TooltipModule,
+        DialogModule,
+        InputTextModule,
+        CheckboxModule,
+    ],
   exports: [
     HeaderComponent,
     MainComponent,

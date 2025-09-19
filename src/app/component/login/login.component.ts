@@ -14,6 +14,6 @@ export class LoginComponent {
   }
 
   formSubmit(event: any) {
-    this.router.navigate(['']);
+    // this.router.navigate(['']);
   }
 }
