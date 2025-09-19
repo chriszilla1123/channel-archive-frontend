@@ -96,7 +96,8 @@ export class ConfigComponent {
       channelId: "",
       channelName: "",
       channelDir: "",
-      videos: []
+      videos: [],
+      enabled: true
     });
   }
 

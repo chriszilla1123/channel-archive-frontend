@@ -18,6 +18,7 @@
             <th style="width:25%">Name</th>
             <th style="width:25%">ID/URL</th>
             <th style="width:25%">Directory</th>
+            <th style="width:25%">Enabled</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-channel>
@@ -25,6 +26,9 @@
             <td class="config-table-channel-name-row">{{ channel.channelName }}</td>
             <td class="config-table-channel-id-row">{{ channel.channelId }}</td>
             <td class="config-table-channel-dir-row">{{ channel.channelDir }}</td>
+            <td class="config-table-channel-enabled-row">
+              <p-checkbox disabled="true" [(ngModel)]="channel.enabled" binary="true"></p-checkbox>
+            </td>
           </tr>
         </ng-template>
       </p-table>
@@ -38,10 +42,11 @@
     <p-table [value]="channels" dataKey="id" [tableStyle]="{ }">
       <ng-template pTemplate="header">
         <tr>
-          <th style="width:25%">Name</th>
-          <th style="width:25%">ID/URL</th>
-          <th style="width:25%">Directory</th>
-          <th style="width:25%"><span class="pi pi-plus" (click)="addChannel()"></span></th>
+          <th style="width:20%">Name</th>
+          <th style="width:20%">ID/URL</th>
+          <th style="width:20%">Directory</th>
+          <th style="width:20%">Enabled</th>
+          <th style="width:20%"><span class="pi pi-plus" (click)="addChannel()"></span></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-channel let-editing="editing" let-ri="rowIndex">
@@ -79,6 +84,7 @@
               </ng-template>
             </p-cellEditor>
           </td>
+          <td style="width:25%"><p-checkbox [(ngModel)]="channel.enabled" binary="true"></p-checkbox> </td>
           <td>
             <p-button type="button" icon="pi pi-arrow-up" size="small" (click)="moveChannelUp(ri)"></p-button>
             <p-button type="button" icon="pi pi-arrow-down" size="small" (click)="moveChannelDown(ri)"></p-button>
